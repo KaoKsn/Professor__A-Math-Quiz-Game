@@ -1,0 +1,6 @@
+001 - A bug that caused the program to not print the correct answer as soon as 3 consecutive wrong answers were read.
+
+Cause: boolean right was initialized only one for all the 10 questions.
+
+Fixed at:
+Mon Sep 29 20:10:35 IST 2025

@@ -58,71 +58,108 @@ class PlayersGUI {
         frame.setVisible(true);
     }
 
-    //==========================WELCOME SCREEN ============================
+    // ========================== WELCOME SCREEN (EDUCATIONAL VIBE) ============================
 
-
-    void welcomeScreen() {
+void welcomeScreen() {
     JPanel panel = new JPanel(new GridBagLayout());
-    panel.setBackground(new Color(245, 248, 255)); // soft background
+    panel.setBackground(Color.WHITE); // Clean, textbook-style background
 
     GridBagConstraints gbc = new GridBagConstraints();
-    gbc.insets = new Insets(10, 0, 10, 0);
+    gbc.insets = new Insets(5, 0, 5, 0); // Tighter spacing
+    gbc.gridx = 0; // Center everything vertically
 
-    JLabel title = new JLabel("Professor");
-    title.setFont(new Font("Segoe UI", Font.BOLD, 34));
+    // 1. Icon / Mascot (Large Graduation Cap)
+    JLabel icon = new JLabel("🎓"); 
+    icon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 60));
+    gbc.gridy = 0;
+    panel.add(icon, gbc);
 
-    JLabel subtitle = new JLabel("A math quiz game");
-    subtitle.setFont(new Font("Segoe UI", Font.ITALIC, 18));
+    // 2. Main Title (Serif font looks more academic)
+    JLabel title = new JLabel("Professor Math");
+    title.setFont(new Font("Serif", Font.BOLD, 36)); 
+    title.setForeground(new Color(44, 62, 80)); // Dark academic grey/blue
+    gbc.gridy = 1;
+    panel.add(title, gbc);
 
-    JButton playBtn = new JButton("PLAY");
-    playBtn.setPreferredSize(new Dimension(150, 50));
-    playBtn.setFont(new Font("Segoe UI", Font.BOLD, 20));
+    // 3. Decorative Math Symbols
+    JLabel mathSymbols = new JLabel("∑   π   √   x²   ÷");
+    mathSymbols.setFont(new Font("Monospaced", Font.BOLD, 22));
+    mathSymbols.setForeground(new Color(100, 149, 237)); // Soft math blue
+    gbc.gridy = 2;
+    gbc.insets = new Insets(10, 0, 20, 0); // Add space below symbols
+    panel.add(mathSymbols, gbc);
+
+    // 4. Motivating Subtitle
+    JLabel subtitle = new JLabel("Sharpen your mind!");
+    subtitle.setFont(new Font("Segoe UI", Font.ITALIC, 16));
+    subtitle.setForeground(Color.GRAY);
+    gbc.gridy = 3;
+    gbc.insets = new Insets(0, 0, 15, 0); 
+    panel.add(subtitle, gbc);
+
+    // 5. "Start Learning" Button
+    JButton playBtn = new JButton("START QUIZ");
+    playBtn.setPreferredSize(new Dimension(200, 55));
+    playBtn.setFont(new Font("Segoe UI", Font.BOLD, 18));
+    playBtn.setBackground(new Color(46, 204, 113)); // Emerald Green (Motivating)
+    playBtn.setForeground(Color.WHITE);
+    playBtn.setFocusPainted(false);
+    playBtn.setBorder(BorderFactory.createRaisedBevelBorder()); // 3D pop effect
+    playBtn.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Hand pointer on hover
 
     playBtn.addActionListener(e -> {
         card.show(mainPanel, "operator");
     });
 
-    gbc.gridy = 0;
-    panel.add(title, gbc);
-
-    gbc.gridy = 1;
-    panel.add(subtitle, gbc);
-
-    gbc.gridy = 2;
-    gbc.insets = new Insets(20, 0, 0, 0); // extra margin
+    gbc.gridy = 4;
     panel.add(playBtn, gbc);
 
     mainPanel.add(panel, "welcome");
 }
 
-
-    // ========================= OPERATOR SELECTION ===========================
- void operatorScreen() {
+// ========================= OPERATOR SELECTION (SIMPLE & CLEAN) ===========================
+void operatorScreen() {
     JPanel panel = new JPanel(new GridBagLayout());
-    panel.setBackground(new Color(240, 248, 255));
+    panel.setBackground(Color.WHITE); // Clean white background
     GridBagConstraints gbc = new GridBagConstraints();
 
-    JLabel label = new JLabel("Choose an operator");
-    label.setFont(new Font("Segoe UI", Font.BOLD, 26));
-    label.setBorder(BorderFactory.createEmptyBorder(20, 0, 30, 0));
+    // 1. Simple Title
+    JLabel label = new JLabel("Select Operation");
+    label.setFont(new Font("Segoe UI", Font.BOLD, 24));
+    label.setForeground(new Color(50, 50, 50)); // Dark Gray
+    label.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
 
-    // MAIN CONTAINER (like a <div>)
-    JPanel container = new JPanel();
-    container.setLayout(new GridLayout(2, 2, 20, 20));
-    container.setPreferredSize(new Dimension(300, 250)); // fixed height & width
-    container.setOpaque(false); // transparent bg
+    // 2. Button Container
+    JPanel container = new JPanel(new GridLayout(2, 2, 15, 15)); // 15px gap
+    container.setPreferredSize(new Dimension(280, 200));
+    container.setOpaque(false);
 
-    String ops[] = {"+", "-", "*", "%"};
+    String[] ops = {"+", "-", "*", "%"};
+    
     for (String op : ops) {
-        JButton playBtn = new JButton(op);
-        playBtn.setFont(new Font("Segoe UI", Font.PLAIN, 36));
+        JButton btn = new JButton(op);
+        btn.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        btn.setFocusPainted(false);
+        btn.setBackground(new Color(230, 240, 255)); // Very light blue
+        btn.setForeground(new Color(0, 100, 200));   // Darker blue text
+        btn.setBorder(BorderFactory.createEmptyBorder()); // Flat look
 
-        playBtn.addActionListener(e -> {
+        // Simple Hover Effect
+        btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn.setBackground(new Color(200, 225, 255));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn.setBackground(new Color(230, 240, 255));
+            }
+        });
+
+        btn.addActionListener(e -> {
             operator = op.charAt(0);
             card.show(mainPanel, "level");
         });
 
-        container.add(playBtn);
+        container.add(btn);
     }
 
     gbc.gridy = 0;
@@ -132,29 +169,47 @@ class PlayersGUI {
     panel.add(container, gbc);
 
     mainPanel.add(panel, "operator");
-    }
+}
 
-    // ========================= LEVEL SELECTION ===========================
 
+
+// ========================= LEVEL SELECTION (SIMPLE & CLEAN) ===========================
 void levelScreen() {
     JPanel panel = new JPanel(new GridBagLayout());
-    panel.setBackground(new Color(240, 255, 240));
+    panel.setBackground(Color.WHITE); 
     GridBagConstraints gbc = new GridBagConstraints();
 
-    JLabel label = new JLabel("Choose a Level");
-    label.setFont(new Font("Segoe UI", Font.BOLD, 26));
-    label.setBorder(BorderFactory.createEmptyBorder(20, 0, 30, 0));
+    // 1. Simple Title
+    JLabel label = new JLabel("Select Difficulty");
+    label.setFont(new Font("Segoe UI", Font.BOLD, 24));
+    label.setForeground(new Color(50, 50, 50));
+    label.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
 
-    JPanel container = new JPanel(new GridLayout(1, 3, 20, 20));
-    container.setPreferredSize(new Dimension(350, 100));
+    // 2. Button Container
+    JPanel container = new JPanel(new GridLayout(1, 3, 20, 0)); // 1 row, 3 cols, 20px gap
+    container.setPreferredSize(new Dimension(380, 80));
     container.setOpaque(false);
 
     for (int i = 1; i <= 3; i++) {
         int levelNum = i;
-
         JButton btn = new JButton(String.valueOf(i));
         btn.setFont(new Font("Segoe UI", Font.BOLD, 28));
         btn.setFocusPainted(false);
+        
+        // distinct clean colors
+        btn.setBackground(new Color(245, 245, 245)); // Light Gray
+        btn.setForeground(Color.BLACK);
+        btn.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
+
+        // Hover Effect
+        btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn.setBackground(new Color(220, 220, 220)); // Darker gray on hover
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn.setBackground(new Color(245, 245, 245));
+            }
+        });
 
         btn.addActionListener(e -> {
             level = levelNum;
@@ -174,7 +229,8 @@ void levelScreen() {
     mainPanel.add(panel, "level");
 }
 
-// =============================== QUIZ SCREEN ================================
+
+// ========================= QUIZ SCREEN ===========================
 
 void quizScreen() {
     JPanel panel = new JPanel(new GridBagLayout());
@@ -298,8 +354,7 @@ private JButton makeSpecialButton(String text, Runnable action) {
 }
 
 
-// ========================= RESULT SCREEN ===========================
-
+    // ========================= RESULT SCREEN ===========================
     JLabel scoreLabel;
     void resultScreen() {
         JPanel panel = new JPanel(new GridBagLayout());
@@ -389,7 +444,7 @@ private JButton makeSpecialButton(String text, Runnable action) {
                 startQuestion();
             }
         }
-    }
+    }   
 }
 
 public class application {

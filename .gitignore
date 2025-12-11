@@ -1,0 +1,4 @@
+*.class
+
+# Ignore todo files
+todo.txt

@@ -8,7 +8,7 @@ class PlayersGUI {
     char operator;
 
     final int T_QUESTIONS = 10;
-    
+
     Random r_generator = new Random();
 
     JFrame frame;
@@ -67,7 +67,7 @@ class PlayersGUI {
         gbc.gridy = 0;
         panel.add(icon, gbc);
 
-        JLabel title = new JLabel("Professor Math");
+        JLabel title = new JLabel("MATH PROFESSOR");
         title.setFont(new Font("Serif", Font.BOLD, 36)); 
         title.setForeground(new Color(44, 62, 80)); 
         gbc.gridy = 1;
@@ -119,14 +119,14 @@ class PlayersGUI {
         container.setOpaque(false);
 
         String[] ops = {"+", "-", "*", "%"};
-        
+
         for (String op : ops) {
             JButton btn = new JButton(op);
             btn.setFont(new Font("Segoe UI", Font.BOLD, 32));
             btn.setFocusPainted(false);
-            btn.setBackground(new Color(230, 240, 255)); 
-            btn.setForeground(new Color(0, 100, 200));   
-            btn.setBorder(BorderFactory.createEmptyBorder()); 
+            btn.setBackground(new Color(230, 240, 255));
+            btn.setForeground(new Color(0, 100, 200));
+            btn.setBorder(BorderFactory.createEmptyBorder());
 
             btn.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -221,7 +221,7 @@ class PlayersGUI {
         exitBtn.setBackground(new Color(255, 116, 116));
         exitBtn.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
         exitBtn.setFocusPainted(false);
-        
+
         // ACTION: End game immediately and show current score
         exitBtn.addActionListener(e -> showResult());
 
@@ -232,7 +232,7 @@ class PlayersGUI {
         // --- 2. QUESTION LABEL ---
         questionLabel = new JLabel("Question...");
         questionLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
-        
+
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE; 
         gbc.insets = new Insets(10, 0, 10, 0);
